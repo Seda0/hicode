@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "374554111753",
+    "project_id": "hicode-4e00b",
+    "storage_bucket": "hicode-4e00b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:374554111753:android:f19b1f0518fa7ec2012dd8",
+        "android_client_info": {
+          "package_name": "com.example.hicode"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcgCpxqAJfDCXVe-HVBQkXkHW0pfHDNCM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
