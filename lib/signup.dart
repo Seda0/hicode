@@ -19,7 +19,9 @@ class SignUp extends StatelessWidget {
           password: passwordController.text.trim(),
         );
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Kayıt Başarılı!")),
+          SnackBar(content: Text("Kayıt Başarılı!"),
+           duration: Duration(seconds: 1),
+       backgroundColor: const Color.fromARGB(255, 120, 190, 112).withOpacity(0.5)),
         );
         Navigator.pushReplacement(
           context,
@@ -27,7 +29,9 @@ class SignUp extends StatelessWidget {
         );
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Hata: $e")),
+          SnackBar(content: Text("Hata: $e"),
+          duration: const Duration(seconds: 1), 
+        backgroundColor: Colors.redAccent.withOpacity(0.5)),
         );
       }
     }
@@ -37,7 +41,7 @@ class SignUp extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           Image.asset(
-            'lib/assets/images/grsl1.jpg', // Arka plan resmi
+            'lib/assets/images/grsl1.jpg', 
             fit: BoxFit.cover,
           ),
           SingleChildScrollView(
@@ -69,7 +73,7 @@ class SignUp extends StatelessWidget {
                   ),
                   const SizedBox(height: 80),
                   Container(
-                    height: 280, // Daha büyük alan
+                    height: 280, 
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.6),
                       borderRadius: const BorderRadius.only(

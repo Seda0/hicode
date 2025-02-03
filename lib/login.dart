@@ -17,28 +17,45 @@ class LogIn extends StatelessWidget {
     final FirebaseAuth _auth = FirebaseAuth.instance;
 
     Future<void> signIn() async {
-      try {
-        await _auth.signInWithEmailAndPassword(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim(),
-        );
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Giriş Başarılı!")),
-        );
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
-        );
-      } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Hata: $e")),
-        );
-      }
+    try {
+    await _auth.signInWithEmailAndPassword(
+      email: emailController.text.trim(),
+      password: passwordController.text.trim(),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(
+       SnackBar(
+        content: Center(child: Text("Giriş Başarılı!")),
+        duration: Duration(seconds: 1),
+       backgroundColor: const Color.fromARGB(255, 120, 190, 112).withOpacity(0.5),  
+      ),
+    );
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const HomePage()),
+    );
+  } on FirebaseAuthException catch (e) {
+    String errorMessage = "Bilinmeyen bir hata oluştu";
+    if (e.code == 'user-not-found') {
+      errorMessage = "Bu e-posta ile kayıtlı bir kullanıcı bulunamadı.";
+    } else if (e.code == 'wrong-password') {
+      errorMessage = "Yanlış şifre! Lütfen tekrar deneyin.";
+    } else if (e.code == 'invalid-email') {
+      errorMessage = "Geçersiz e-posta adresi!";
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Hata: $errorMessage"),
+        duration: const Duration(seconds: 1), 
+        backgroundColor: Colors.redAccent.withOpacity(0.5),  
+      ),
+    );
+  }
     }
 
     return Scaffold(
+      //resizeToAvoidBottomInset: false,
       body: Stack(
-        fit: StackFit.expand, // Arka plan resmini tam ekran yap
+        fit: StackFit.expand, 
         children: [
           Image.asset(
             'lib/assets/images/grsl1.jpg', 
@@ -48,7 +65,7 @@ class LogIn extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start, // Sola hizalama
+                crossAxisAlignment: CrossAxisAlignment.start, 
                 children: [
                   Align(
                     alignment: Alignment.topLeft,
@@ -56,16 +73,16 @@ class LogIn extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 200.0), 
                       child: Text(
                         'En büyük sevgi, \ninsanlık sevgisidir.', 
-                        textAlign: TextAlign.left, // Yazıyı sola hizala
+                        textAlign: TextAlign.left, 
                         style: TextStyle(
                           fontSize: 35.0, 
                           fontWeight: FontWeight.bold, 
                           color: Colors.white, 
                           shadows: [
                             Shadow(
-                              color: Colors.black.withOpacity(0.6), // Hafif gölge
+                              color: Colors.black.withOpacity(0.6),
                               blurRadius: 4.0,
-                              offset: const Offset(2, 2), // Gölgede kaydırma
+                              offset: const Offset(2, 2), 
                             ),
                           ],
                         ),
